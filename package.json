@@ -1,0 +1,44 @@
+{
+  "name": "angular-seed",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A starter project for AngularJS",
+  "repository": "https://github.com/angular/angular-seed",
+  "license": "MIT",
+  "devDependencies": {
+    "angular": "~1.6.6",
+    "autoprefixer": "^7.1.4",
+    "bower": "^1.7.7",
+    "browser-sync": "^2.18.13",
+    "html5-boilerplate": "^5.3.0",
+    "node-sass": "^4.5.3",
+    "onchange": "^3.2.1",
+    "parallelshell": "^3.0.1",
+    "postcss-cli": "^4.1.1",
+    "uglify-js": "^3.1.2"
+  },
+  "scripts": {
+    "prestart": "npm install",
+    "start": "http-server -a localhost -p 8000 -c-1 ./app",
+    "pretest": "npm install",
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+    "update-index-async": "node -e \"var fs=require('fs'),indexFile='app/index-async.html',loaderFile='app/bower_components/angular-loader/angular-loader.min.js',loaderText=fs.readFileSync(loaderFile,'utf-8').split(/sourceMappingURL=angular-loader.min.js.map/).join('sourceMappingURL=bower_components/angular-loader/angular-loader.min.js.map'),indexText=fs.readFileSync(indexFile,'utf-8').split(/\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/).join('//@@NG_LOADER_START@@\\n'+loaderText+'    //@@NG_LOADER_END@@');fs.writeFileSync(indexFile,indexText);\"",
+    "scss": "bin/scss.js",
+    "autoprefixer": "postcss -u autoprefixer --autoprefixer.browsers '&gt; 5%, ie 9' -r dist/css/*",
+    "uglify": "bin/recursive-uglify.js",
+    "imagemin": "imagemin app/assets dist/images",
+    "serve": "browser-sync start --server --files 'dist/css/*.css, dist/js/*.js'",
+    "build:css": "npm run scss && npm run autoprefixer",
+    "build:js": "npm run uglify",
+    "build:images": "npm run imagemin",
+    "build:all": "npm run build:css && npm run build:js && npm run build:images",
+    "watch:css": "onchange 'app/styles/*.scss' -- npm run build:css",
+    "watch:js": "onchange 'app/**/*.js' -- npm run build:js",
+    "watch:all": "npm run build:all && parallelshell 'npm run serve' 'npm run watch:css' 'npm run watch:js'"
+  },
+  "dependencies": {
+    "angular-ui-router": "^1.0.3",
+    "shelljs": "^0.7.8"
+  }
+}
